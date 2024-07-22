@@ -1,4 +1,22 @@
-server:
-  port: 8080
-
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/august
+    username: root
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  logging:
+    level:
+      org.springframework: DEBUG
+      hibernate: DEBUG
+      spring.data.jpa: DEBUG
