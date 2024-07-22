@@ -2,6 +2,7 @@ package org.project.portfolio.auth
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.Valid
 import org.project.portfolio.auth.dto.LoginRequest
 import org.project.portfolio.auth.dto.RegisterRequest
 import org.project.portfolio.auth.dto.TokenResponse
@@ -27,7 +28,7 @@ class AuthController(
     @PostMapping("/login")
     @Operation(summary = "로그인 API", description = "Authenticate the user and return the JWT token")
     fun login(
-        @RequestBody loginRequest: LoginRequest
+        @Valid @RequestBody loginRequest: LoginRequest
     ): ResponseEntity<TokenResponse> {
         return ResponseEntity.ok(authService.login(loginRequest))
     }
@@ -40,7 +41,7 @@ class AuthController(
     @PostMapping("/register")
     @Operation(summary = "회원가입 API", description = "Create a new user account")
     fun register(
-        @RequestBody registerRequest: RegisterRequest
+        @Valid @RequestBody registerRequest: RegisterRequest
     ): ResponseEntity<TokenResponse> {
         return ResponseEntity.ok(authService.register(registerRequest))
     }

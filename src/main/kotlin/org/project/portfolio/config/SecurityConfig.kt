@@ -21,8 +21,7 @@ class SecurityConfig(
 
     /** 허용 URL 목록 */
     private val WHITE_LIST_URL = arrayOf<String>(
-        "/api/v1/auth/login",
-        "/api/v1/auth/register",
+        "/api/v1/auth/**",
         "/h2-console/**",
         "/swagger-ui/**",
         "/v3/api-docs/**",

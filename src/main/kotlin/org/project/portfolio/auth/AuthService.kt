@@ -50,7 +50,7 @@ class AuthService(
      * @return JWT 토큰
      */
     fun login(loginRequest: LoginRequest): TokenResponse {
-        val user = userRepository.findById(loginRequest.email).orElseThrow {
+        val user = userRepository.findById(loginRequest.email!!).orElseThrow {
             throw UsernameNotFoundException("User not found")
         }
         if (!passwordEncoder.matches(loginRequest.password, user.password)) {

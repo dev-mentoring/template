@@ -30,7 +30,7 @@ class AuthControllerTest {
         // given
         val loginRequest: LoginRequest = LoginRequest(
             email = "test@test.com",
-            password = "password"
+            password = "Password1234~!"
         )
 
         // when
@@ -52,7 +52,7 @@ class AuthControllerTest {
         // given
         val loginRequest: LoginRequest = LoginRequest(
             email = "test@test.com",
-            password = "wrong_password"
+            password = "wrong_password1234~!"
         )
 
         // when
@@ -97,7 +97,7 @@ class AuthControllerTest {
         // given
         val registerRequest: RegisterRequest = RegisterRequest(
             email = "test@test.com",
-            password = "password1234~!",
+            password = "Password1234~!",
             phone = "010-1234-5678",
             name = "테스터"
         )
@@ -119,7 +119,7 @@ class AuthControllerTest {
         // given
         val registerRequest: RegisterRequest = RegisterRequest(
             email = "test",
-            password = "password1234~!",
+            password = "Password1234~!",
             phone = "010-1234-5678",
             name = "테스터"
         )
@@ -141,8 +141,8 @@ class AuthControllerTest {
         // given
         val registerRequest: RegisterRequest = RegisterRequest(
             email = "test123@test.com",
-            password = "password1234~!",
-            phone = "my_phone_number_is_010-1234-5678",
+            password = "Password1234~!",
+            phone = "I am not a phone number",
             name = "테스터"
         )
 
@@ -163,8 +163,8 @@ class AuthControllerTest {
         // given
         val registerRequest: RegisterRequest = RegisterRequest(
             email = "test123@test.com",
-            password = "password1234~!",
-            phone = "my_phone_number_is_010-1234-5678",
+            password = "Password1234~!",
+            phone = "010-1234-5678",
             name = "테스터123@*(&$(*@$&*(^<h1>"
         )
 
@@ -186,7 +186,7 @@ class AuthControllerTest {
         val registerRequest: RegisterRequest = RegisterRequest(
             email = "test123@test.com",
             password = "password",
-            phone = "my_phone_number_is_010-1234-5678",
+            phone = "010-1234-5678",
             name = "테스터"
         )
 
