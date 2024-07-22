@@ -24,11 +24,11 @@ public class MemberRegisterDto {
     private String phone;
 
     @NotBlank(message = "이름은 필수 입력 항목입니다.")
-    @Pattern(regexp = "^[a-zA-Z가-힣]{10,40}$", message = "이름은 대소문자 및 한글 이름만 가능합니다.")
+    @Pattern(regexp = "^[a-zA-Z가-힣]{3,20}$", message = "이름은 대소문자 및 한글만 포함이 가능합니다.")
     private String username;
     
     @NotBlank(message = "비밀번호은 필수 입력 항목입니다.")
-    @Pattern(regexp = "^(?=(?:.*[a-z]))(?=(?:.*[A-Z]))(?=(?:.*\\d){5,})(?=(?:.*[!@#$%^&*()_+]){1,}).{6,}$", message = "대소문자 및 숫자를 포함하여 5개 이상과 특수문자을 1개 이상포함해야 합니다.")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d.*\\d.*\\d.*\\d.*\\d)(?=.*[!@#$%^&*()_+].*[!@#$%^&*()_+]).{8,}$", message = "대소문자, 숫자 5개 이상, 특수문자 포함 2개 이상 검즘")
     private String password;
 
 }
