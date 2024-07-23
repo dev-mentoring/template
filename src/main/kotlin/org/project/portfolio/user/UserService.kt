@@ -1,5 +1,7 @@
 package org.project.portfolio.user
 
+import org.project.portfolio.common.BusinessException
+import org.project.portfolio.common.ErrorCode
 import org.springframework.stereotype.Service
 
 @Service
@@ -13,7 +15,7 @@ class UserService(
      */
     fun getUser(email: String): User {
         return userRepository.findById(email).orElseThrow {
-            throw IllegalArgumentException("User not found")
+            throw BusinessException(ErrorCode.USER_NOT_FOUND)
         }
     }
 }

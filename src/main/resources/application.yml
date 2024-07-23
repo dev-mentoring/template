@@ -38,4 +38,7 @@ springdoc:
   swagger-ui:
     tags-sorter: alpha
 
-
+server:
+  servlet:
+    encoding:
+      force-response: true # 한글 인코딩 반환 강제화
