@@ -1,12 +1,19 @@
 package org.project.portfolio.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "post")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostEntity extends AuditingEntity {
   
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
   
   @ManyToOne
