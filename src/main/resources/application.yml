@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+  datasource:
+    hikari:
+      maximum-pool-size: 4
+    url: jdbc:mysql://localhost:23306/portfolio_board?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=Asia/Seoul
+    username: root
+    password: root123!@#
+    driver-class-name: com.mysql.cj.jdbc.Driver
