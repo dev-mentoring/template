@@ -3,6 +3,7 @@ package org.project.portfolio.global.security.login.filter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+@Slf4j
 public class CustomJsonUsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
     private static final String DEFAULT_LOGIN_REQUEST_URL = "/login"; // "/login"으로 오는 요청을 처리
     private static final String HTTP_METHOD = "POST"; // 로그인 HTTP 메소드는 POST
@@ -32,7 +34,6 @@ public class CustomJsonUsernamePasswordAuthenticationFilter extends AbstractAuth
         this.objectMapper = objectMapper;
     }
 
-
     @Override
     public Authentication attemptAuthentication(
             HttpServletRequest request,
@@ -42,7 +43,6 @@ public class CustomJsonUsernamePasswordAuthenticationFilter extends AbstractAuth
             throw new AuthenticationServiceException("Authentication Content-Type not supported: "
                     + request.getContentType());
         }
-
         String messageBody = StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
         Map<String, String> useranmePasswordMap = objectMapper.readValue(messageBody, Map.class);
         String username = useranmePasswordMap.get(USERNAME_KEY);
@@ -53,28 +53,3 @@ public class CustomJsonUsernamePasswordAuthenticationFilter extends AbstractAuth
         return this.getAuthenticationManager().authenticate(token);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,8 +2,10 @@ package org.project.portfolio.global.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.project.portfolio.domain.users.repository.UsersRepository;
 import org.project.portfolio.global.redis.RedisDao;
 import org.project.portfolio.global.security.jwt.JwtProvider;
+import org.project.portfolio.global.security.jwt.filter.JwtAuthenticationProcessingFilter;
 import org.project.portfolio.global.security.login.filter.CustomJsonUsernamePasswordAuthenticationFilter;
 import org.project.portfolio.global.security.login.handler.LoginFailureHandler;
 import org.project.portfolio.global.security.login.handler.LoginSuccessHandler;
@@ -28,13 +30,13 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 public class WebSecurityConfig {
 
     private static final String[] USER_API_URL = {
-            "/api/users/login",
             "/api/users/register"
     };
 
     private final LoginService loginService;
     private final JwtProvider jwtProvider;
     private final ObjectMapper objectMapper;
+    private final UsersRepository usersRepository;
     private final RedisDao redisDao;
 
     @Bean
@@ -71,6 +73,11 @@ public class WebSecurityConfig {
     }
 
     @Bean
+    public JwtAuthenticationProcessingFilter jwtAuthenticationProcessingFilter() {
+        return new JwtAuthenticationProcessingFilter(jwtProvider, redisDao, usersRepository);
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
@@ -80,8 +87,8 @@ public class WebSecurityConfig {
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers(USER_API_URL).permitAll()
                 )
-                // Custom Filter
                 .addFilterAfter(customJsonUsernamePasswordAuthenticationFilter(), LogoutFilter.class)
+                .addFilterBefore(jwtAuthenticationProcessingFilter(), CustomJsonUsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 }
