@@ -32,7 +32,7 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
         String username = extractUsername(authentication);
         String role = extractRole(authentication);
         String accessToken = jwtProvider.createAccessToken(username, role);
-        String refreshToken = jwtProvider.createRefreshToken();
+        String refreshToken = jwtProvider.createRefreshToken(username);
 
         jwtProvider.sendAccessAndRefreshToken(response, accessToken, refreshToken);
 
