@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     private static final String LOG_FORMAT = "Status: {}, Class: {}, Code: {}, Message: {}";
 
-    @ExceptionHandler(PortfolioException.class)
-    public ResponseEntity<ApiErrorResponse> handlerPortfolioException(HttpServletRequest request, PortfolioException e) {
+    @ExceptionHandler(ChaekBilRyoZoException.class)
+    public ResponseEntity<ApiErrorResponse> handlerPortfolioException(HttpServletRequest request, ChaekBilRyoZoException e) {
         ErrorCode errorCode = e.getErrorCode();
         HttpStatus status = errorCode.getStatus();
         String exception = e.getClass().getSimpleName();

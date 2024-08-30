@@ -31,15 +31,13 @@ public class UsersService {
     public MessageResponseDto register(RegisterRequestDto requestDto) {
         // 회원 중복 확인
         Optional<Users> checkUsername = usersRepository.findByUsername(requestDto.getUsername());
-        if (checkUsername.isPresent()) {
+        if (checkUsername.isPresent())
             throw new UserDuplicateUsernameException();
-        }
 
         // email 중복확인
         Optional<Users> checkEmail = usersRepository.findByEmail(requestDto.getEmail());
-        if (checkEmail.isPresent()) {
+        if (checkEmail.isPresent())
             throw new UserDuplicateEmailException();
-        }
 
         // 비밀번호 인코딩
         String password = passwordEncoder.encode(requestDto.getPassword());
