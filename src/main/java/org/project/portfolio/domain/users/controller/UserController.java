@@ -10,10 +10,7 @@ import org.project.portfolio.domain.users.service.UsersService;
 import org.project.portfolio.global.exception.dto.ApiSuccessResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -25,19 +22,25 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<ApiSuccessResponse<MessageResponseDto>> register(
             @Valid @RequestBody RegisterRequestDto requestDto,
-            HttpServletRequest servRequest
+            HttpServletRequest servletRequest
     ) {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(ApiSuccessResponse.of(
                         HttpStatus.OK,
-                        servRequest.getServletPath(),
+                        servletRequest.getServletPath(),
                         usersService.register(requestDto)
                 ));
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<MessageResponseDto> login(@RequestBody LoginRequestDto requestDto) {
-//        usersService.login(requestDto);
-//    }
+    @GetMapping("/logout")
+    public ResponseEntity<ApiSuccessResponse<MessageResponseDto>> logout(HttpServletRequest servletRequest) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(ApiSuccessResponse.of(
+                        HttpStatus.OK,
+                        servletRequest.getServletPath(),
+                        usersService.logout(servletRequest)
+                ));
+    }
 }

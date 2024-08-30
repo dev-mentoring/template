@@ -30,7 +30,8 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 public class WebSecurityConfig {
 
     private static final String[] USER_API_URL = {
-            "/api/users/register"
+            "/api/users/register",
+            "/api/users/logout"
     };
 
     private final LoginService loginService;
